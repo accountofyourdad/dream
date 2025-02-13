@@ -1,0 +1,17 @@
+leetcode problem 3066
+
+
+
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:        //given
+        heapq.heapify(nums)        // a function that transfer the nums into minimum heap which allows extraction of smallest numbers in o(log(n)) time
+                                //this transform num into min heap
+        num_operations = 0          //for counting purpose
+        while nums[0] < k:            //will do so until all the element satisfies this condition
+            x = heapq.heappop(nums)    //this removes and returns the smallest element in the queue
+            y = heapq.heappop(nums)     // here this also do the same as above 
+            heapq.heappush(nums, min(x, y) * 2 + max(x, y))        // this creates a new variable and pushes into the heap
+
+            num_operations += 1            // incrementing the count so that to get min count  
+
+        return num_operations            //return the count
